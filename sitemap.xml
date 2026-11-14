@@ -1,0 +1,30 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Portfolio -->
+  <url>
+    <loc>https://narendrakoya999.github.io/narendra-koya-web-development-services/</loc>
+  </url>
+
+  <!-- Clinic Demo -->
+  <url>
+    <loc>https://narendrakoya999.github.io/narendra-koya-web-development-services/demos/clinic/</loc>
+  </url>
+
+  <!-- Restaurant Demo -->
+  <url>
+    <loc>https://narendrakoya999.github.io/narendra-koya-web-development-services/demos/restaurant/</loc>
+  </url>
+
+  <!-- Home Services Demo -->
+  <url>
+    <loc>https://narendrakoya999.github.io/narendra-koya-web-development-services/demos/home-services/</loc>
+  </url>
+
+  <!-- Privacy Page -->
+  <url>
+    <loc>https://narendrakoya999.github.io/narendra-koya-web-development-services/privacy.html</loc>
+  </url>
+
+</urlset>

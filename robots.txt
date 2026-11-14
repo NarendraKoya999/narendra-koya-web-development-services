@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /narendra-koya-web-development-services/
+
+Sitemap: https://narendrakoya999.github.io/narendra-koya-web-development-services/sitemap.xml
