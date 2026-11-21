@@ -48,7 +48,7 @@ body {
 body,
 main,
 .site-footer {
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
 }
 
 a {
@@ -2202,6 +2202,47 @@ summary:focus-visible {
 }
 
 
+.review-links,
+.package-card > p:not(.package-price),
+.package-card li {
+  font-size: 14px;
+}
+
+.review-links a,
+.faq-list p a,
+.privacy-copy p a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.products-section {
+  background: #f0efe9;
+}
+
+.product-card {
+  max-width: 680px;
+  min-height: 0;
+  align-items: flex-start;
+}
+
+.product-status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f0f1ff;
+  color: #483b91;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.privacy-copy {
+  max-width: 760px;
+}
+
+.privacy-copy h1 {
+  font: 800 clamp(38px, 6vw, 58px)/1.1 var(--display);
+  letter-spacing: -0.06em;
+}
+
 /* ==========================================
    15. FAQ SECTION
 ========================================== */
@@ -2625,7 +2666,7 @@ summary:focus-visible {
   /* Announcement */
 
   .announcement {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   /* Mobile header */
@@ -2634,7 +2675,7 @@ summary:focus-visible {
     height: 68px;
   }
 
-  .menu-toggle {
+  .nav-ready .menu-toggle {
     display: flex;
   }
 
@@ -2669,6 +2710,34 @@ summary:focus-visible {
     margin-top: 12px;
     border: 0;
     text-align: center;
+  }
+
+  /* Keep section links usable when the menu script is unavailable. */
+  #top:not(.nav-ready) {
+    position: static;
+  }
+
+  #top:not(.nav-ready) .nav-wrap {
+    height: auto;
+    flex-wrap: wrap;
+    padding-block: 12px;
+  }
+
+  #top:not(.nav-ready) .primary-nav {
+    position: static;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 0 14px;
+    width: 100%;
+    padding: 4px 0 0;
+    box-shadow: none;
+  }
+
+  #top:not(.nav-ready) .primary-nav > a {
+    margin: 0;
+    padding: 8px;
+    border: 0;
   }
 
   /* Hero */
@@ -2849,7 +2918,7 @@ summary:focus-visible {
   }
 
   .demo-notice p {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .demo-open-pill {
