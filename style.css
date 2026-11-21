@@ -2434,6 +2434,16 @@ summary:focus-visible {
 }
 
 
+.document-link,
+.document-languages a {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.document-languages {
+  margin: 0 0 .75rem;
+}
+
 /* Contact form */
 
 .contact-form {
