@@ -2201,6 +2201,11 @@ summary:focus-visible {
   font-size: 11px;
 }
 
+.package-card .button + .text-link {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
 
 .review-links,
 .package-card > p:not(.package-price),
