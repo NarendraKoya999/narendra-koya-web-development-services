@@ -1,7 +1,7 @@
 NARENDRA KOYA — PERSONAL FRONTEND DEVELOPER PORTFOLIO
 
 ABOUT THIS PORTFOLIO
-This is a personal portfolio for Narendra Koya. It does not present an unregistered company or agency.
+This is Narendra Koya’s personal portfolio, website services and independent product showcase. It does not present an unregistered company or agency.
 The portfolio separates professional experience from self-initiated demonstration websites.
 
 PROFESSIONAL EXPERIENCE
@@ -19,8 +19,8 @@ All business names, addresses, contact details, menu items and sample prices are
 FILES
 - index.html       Main personal portfolio
 - style.css        Portfolio styles and responsive layouts
-- script.js        Mobile navigation, website self-check and email enquiry draft
-- privacy.html     Starter privacy information page
+- script.js        Mobile navigation, enquiries by package and email drafts
+- privacy.html     Visitor privacy information
 - demos/           Three standalone demo websites, each with HTML, CSS and JavaScript
 
 PREVIEW LOCALLY
@@ -43,5 +43,5 @@ BEFORE PUBLISHING
 3. Keep all demo labels and fictional-business disclaimers visible.
 4. Replace no demo content with client claims unless the work and permission are real.
 5. The portfolio enquiry form opens the visitor's email application. A backend is needed for direct form submission.
-6. Review the privacy note if analytics, embedded services or a backend are added.
+6. Confirm analytics, retention and the commercial host before launch. GA4 is configured only on the existing production portfolio origin and path. Review the privacy note whenever integrations change.
 7. Google Fonts require an internet connection; system fallbacks are provided.

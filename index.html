@@ -5,19 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Analytics 4 (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7P3CYG7T3"></script>
+  <!-- Keep local and review traffic out of the existing production property. -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
+    if (location.origin === "https://narendrakoya999.github.io" &&
+        location.pathname.startsWith("/narendra-koya-web-development-services/")) {
+      const measurementId = "G-T7P3CYG7T3";
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", measurementId);
+      const tag = document.createElement("script");
+      tag.async = true;
+      tag.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
+      document.head.append(tag);
     }
-
-    gtag('js', new Date());
-    gtag('config', 'G-T7P3CYG7T3');
   </script>
-  <!-- End Google Analytics 4 -->
 
 
   <!-- Bing Webmaster Tools Verification -->
@@ -25,14 +27,14 @@
 
   <meta name="theme-color" content="#10152d">
   <meta name="description"
-    content="Narendra Koya is a frontend developer based in Hyderabad, India, specialising in React.js, Next.js, Vue.js, TypeScript, responsive design, accessibility and frontend performance.">
+    content="Explore mobile-friendly website packages for Indian small businesses, try interactive demos and request a written quote from Hyderabad frontend developer Narendra Koya.">
 
-  <meta property="og:title" content="Narendra Koya | Frontend Developer">
+  <meta property="og:title" content="Small Business Website Development in Hyderabad and India | Narendra Koya">
   <meta property="og:description"
-    content="Building clear, fast and accessible digital experiences with React.js, Next.js, Vue.js and TypeScript.">
+    content="Explore mobile-friendly website packages for Indian small businesses, try interactive demos and request a written quote from Hyderabad frontend developer Narendra Koya.">
   <meta property="og:type" content="website">
 
-  <title>Narendra Koya | Frontend Developer</title>
+  <title>Small Business Website Development in Hyderabad and India | Narendra Koya</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,8 +90,7 @@
   <!-- Announcement bar -->
   <div class="announcement">
     <span class="announcement-dot"></span>
-    Frontend development with care and clarity
-    <a href="#contact">Let's talk ↗</a>
+    Independent frontend developer · Hyderabad, India
   </div>
 
   <!-- Header -->
@@ -119,13 +120,13 @@
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
 
         <a href="#services">Services</a>
-        <a href="#work">Demo websites</a>
-        <a href="#process">Process</a>
+        <a href="#packages">Packages</a>
+        <a href="#work">Demos</a>
+        <a href="#products">Products</a>
         <a href="#experience">Experience</a>
-        <a href="#about">About</a>
 
         <a class="nav-cta" href="#contact">
-          Let's talk <span>↗</span>
+          Get a website quote <span>↗</span>
         </a>
 
       </nav>
@@ -147,27 +148,26 @@
 
           <p class="eyebrow light-eyebrow">
             <span class="eyebrow-line"></span>
-            FRONTEND DEVELOPMENT · REACT · NEXT.JS · VUE
+            SMALL BUSINESS WEBSITES · HYDERABAD, INDIA
           </p>
 
           <h1>
-            I build web experiences that are
+            Websites that make it easy for customers to
             <span class="gradient-text">
-              clear, fast & useful.
+              contact you.
             </span>
           </h1>
 
           <p class="hero-lede">
-            I'm Narendra Koya, a frontend developer who turns
-            product ideas and designs into responsive, accessible
-            interfaces. I care about clean code, smooth experiences
-            and making the web easier for everyone to use.
+            I’m Narendra Koya, a frontend developer in Hyderabad. I build mobile-friendly
+            websites for Indian small businesses so customers can see what you offer
+            and ask for a quote.
           </p>
 
           <div class="hero-actions">
 
             <a class="button button-lime" href="#contact">
-              Discuss a project <span>↗</span>
+              Get a website quote <span>↗</span>
             </a>
 
             <a class="text-link light-link" href="#work">
@@ -338,7 +338,7 @@
 
       <div class="container trust-inner">
 
-        <p>FRONTEND DEVELOPMENT FOR REAL-WORLD PRODUCTS</p>
+        <p>WEBSITES FOR SMALL BUSINESSES</p>
 
         <div class="trust-types">
           <span>Healthcare</span>
@@ -390,13 +390,13 @@
             </div>
 
             <h3>
-              A website built<br>
-              around <em>you.</em>
+              Launch your first<br>
+              <em>website.</em>
             </h3>
 
             <p>
-              A clear, welcoming online home that tells your story
-              and helps customers know exactly what to do next.
+              Give customers one place to find your services, the areas you cover
+              and how to reach you.
             </p>
 
             <ul>
@@ -406,8 +406,8 @@
               <li>Search-friendly foundations</li>
             </ul>
 
-            <a class="card-link" href="#contact">
-              Build my website <span>↗</span>
+            <a class="card-link" href="#packages">
+              See website packages <span>↗</span>
             </a>
 
           </article>
@@ -436,8 +436,8 @@
               <li>Better mobile experience</li>
             </ul>
 
-            <a class="card-link" href="#contact">
-              Refresh my website <span>↗</span>
+            <a class="card-link" href="#contact" data-enquiry="refresh">
+              Discuss a refresh <span>↗</span>
             </a>
 
           </article>
@@ -466,8 +466,8 @@
               <li>Accessibility and SEO basics</li>
             </ul>
 
-            <a class="card-link" href="#contact">
-              Fix my website <span>↗</span>
+            <a class="card-link" href="#contact" data-enquiry="fix">
+              Ask about a fix <span>↗</span>
             </a>
 
           </article>
@@ -484,96 +484,66 @@
 
     </section>
 
-    <!-- WHO I HELP -->
-    <section class="section-pad audience-section" id="businesses">
-
-      <div class="container audience-layout">
-
-        <div class="audience-intro">
-
-          <p class="eyebrow">
-            <span class="eyebrow-line"></span>
-            WHO I WORK WITH
+    <!-- PACKAGES -->
+    <section class="section-pad packages-section" id="packages">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span>WEBSITE PACKAGES</p>
+            <h2>Choose a website<br><span class="muted-heading">for your business.</span></h2>
+          </div>
+          <p class="heading-aside">
+            I’ll confirm the pages, price and timeline in writing before work begins.
           </p>
-
-          <h2>
-            Different businesses.
-            <br>
-            <span class="muted-heading">One clear goal.</span>
-          </h2>
-
-          <p>
-            I can shape a website around the people who use it —
-            with clear information, accessible layouts and
-            practical paths to get in touch.
-          </p>
-
-          <a class="text-link" href="#contact">
-            Tell me about your business ↗
-          </a>
-
         </div>
 
-        <div class="audience-grid">
-
-          <article class="audience-item">
-            <span class="audience-icon">＋</span>
-            <div>
-              <h3>Clinics & healthcare</h3>
-              <p>Services, practitioner details and simple appointment requests.</p>
-            </div>
-            <span class="item-arrow">↗</span>
+        <div class="package-grid">
+          <article class="package-card">
+            <h3>One-page Starter</h3>
+            <p>Put your services, service area and contact details on one page that you can share with customers.</p>
+            <ul>
+              <li>One mobile-friendly page</li>
+              <li>Service and location sections</li>
+              <li>A clear way to enquire</li>
+            </ul>
+            <a class="button button-outline" href="#contact" data-enquiry="starter"
+              aria-label="Request a written quote for One-page Starter">Request a written quote ↗</a>
           </article>
 
-          <article class="audience-item">
-            <span class="audience-icon">✳</span>
-            <div>
-              <h3>Restaurants & cafés</h3>
-              <p>Menus, opening hours, location and table enquiries.</p>
-            </div>
-            <span class="item-arrow">↗</span>
+          <article class="package-card package-highlight">
+            <h3>Small Business Website</h3>
+            <p>Give customers room to explore what you do before they get in touch.</p>
+            <ul>
+              <li>Separate pages for key information</li>
+              <li>Service descriptions and contact options</li>
+              <li>Page titles and search descriptions</li>
+            </ul>
+            <a class="button button-dark" href="#contact" data-enquiry="business"
+              aria-label="Request a written quote for Small Business Website">Request a written quote ↗</a>
           </article>
 
-          <article class="audience-item">
-            <span class="audience-icon">✦</span>
-            <div>
-              <h3>Salons, spas & fitness</h3>
-              <p>Service lists, team introductions and booking options.</p>
-            </div>
-            <span class="item-arrow">↗</span>
+          <article class="package-card">
+            <h3>Website Refresh</h3>
+            <p>Share your current website and what gets in the way. I’ll review the issue and quote for the changes.</p>
+            <ul>
+              <li>Review of the existing site</li>
+              <li>Agreed mobile or usability fixes</li>
+              <li>Checks on the updated pages</li>
+            </ul>
+            <a class="button button-outline" href="#contact" data-enquiry="refresh"
+              aria-label="Request a written quote for Website Refresh">Request a written quote ↗</a>
           </article>
-
-          <article class="audience-item">
-            <span class="audience-icon">⌂</span>
-            <div>
-              <h3>Local service businesses</h3>
-              <p>What you do, where you work and how to request a quote.</p>
-            </div>
-            <span class="item-arrow">↗</span>
-          </article>
-
-          <article class="audience-item">
-            <span class="audience-icon">▦</span>
-            <div>
-              <h3>Shops & online stores</h3>
-              <p>Product pages and a smoother path from browsing to buying.</p>
-            </div>
-            <span class="item-arrow">↗</span>
-          </article>
-
-          <article class="audience-item">
-            <span class="audience-icon">✎</span>
-            <div>
-              <h3>Education & coaching</h3>
-              <p>Courses, programmes and clear ways to ask about joining.</p>
-            </div>
-            <span class="item-arrow">↗</span>
-          </article>
-
         </div>
-
+        <p class="pricing-note">
+          Domain registration, hosting, business email, ongoing updates, payment and booking integrations
+          are quoted separately where needed.
+        </p>
+        <p class="review-links">
+          Already have a site?
+          <a href="#contact" data-enquiry="check">Request a free homepage check</a>
+          or <a href="#contact" data-enquiry="review">ask about a full website review</a>.
+        </p>
       </div>
-
     </section>
 
     <!-- DEMO WEBSITES -->
@@ -782,6 +752,99 @@
           information. No real business, customer or client relationship
           is represented.
         </p>
+        <a class="text-link" href="#contact" data-enquiry="demo">Ask about a website like this ↗</a>
+
+      </div>
+
+    </section>
+
+    <!-- WHO I HELP -->
+    <section class="section-pad audience-section" id="businesses">
+
+      <div class="container audience-layout">
+
+        <div class="audience-intro">
+
+          <p class="eyebrow">
+            <span class="eyebrow-line"></span>
+            WHO I WORK WITH
+          </p>
+
+          <h2>
+            Different businesses.
+            <br>
+            <span class="muted-heading">One clear goal.</span>
+          </h2>
+
+          <p>
+            I can shape a website around the people who use it —
+            with clear information, accessible layouts and
+            practical paths to get in touch.
+          </p>
+
+          <a class="text-link" href="#contact">
+            Tell me about your business ↗
+          </a>
+
+        </div>
+
+        <div class="audience-grid">
+
+          <article class="audience-item">
+            <span class="audience-icon">＋</span>
+            <div>
+              <h3>Clinics & healthcare</h3>
+              <p>Services, practitioner details and simple appointment requests.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">✳</span>
+            <div>
+              <h3>Restaurants & cafés</h3>
+              <p>Menus, opening hours, location and table enquiries.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">✦</span>
+            <div>
+              <h3>Salons, spas & fitness</h3>
+              <p>Service lists, team introductions and booking options.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">⌂</span>
+            <div>
+              <h3>Local service businesses</h3>
+              <p>What you do, where you work and how to request a quote.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">▦</span>
+            <div>
+              <h3>Shops & online stores</h3>
+              <p>Product pages and a smoother path from browsing to buying.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+          <article class="audience-item">
+            <span class="audience-icon">✎</span>
+            <div>
+              <h3>Education & coaching</h3>
+              <p>Courses, programmes and clear ways to ask about joining.</p>
+            </div>
+            <span class="item-arrow">↗</span>
+          </article>
+
+        </div>
 
       </div>
 
@@ -832,8 +895,8 @@
             <span class="step-icon">◇</span>
             <h3>Plan the experience</h3>
             <p>
-              We agree on the pages, content, design direction,
-              features, scope and estimated timeline.
+              You receive a written quote covering the pages, fee, revisions
+              and estimated delivery date before you decide.
             </p>
             <span class="step-caption">A clear project plan</span>
           </article>
@@ -864,6 +927,22 @@
 
       </div>
 
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section-pad products-section" id="products" aria-labelledby="products-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="products-title">Products</h2>
+        </div>
+        <article class="package-card product-card">
+          <span class="product-status">In Development</span>
+          <h3>FollowUp Mitra</h3>
+          <p>I’m exploring how small businesses keep track of customer enquiries and decide who
+            to follow up with next. If you run a small business, I’d like to hear how you handle this today.</p>
+          <a class="text-link" href="mailto:narendra.koya.in@gmail.com?subject=FollowUp%20Mitra%20feedback">Share your follow-up process ↗</a>
+        </article>
+      </div>
     </section>
 
     <!-- PROFESSIONAL EXPERIENCE -->
@@ -1274,119 +1353,6 @@
 
     </section>
 
-    <!-- PACKAGES -->
-    <section class="section-pad packages-section" id="packages">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div>
-            <p class="eyebrow">
-              <span class="eyebrow-line"></span>
-              WAYS TO WORK TOGETHER
-            </p>
-
-            <h2>
-              A clear next step
-              <br>
-              <span class="muted-heading">for every stage.</span>
-            </h2>
-          </div>
-
-          <p class="heading-aside">
-            Every business is different. Start with a conversation
-            and get a quote based on what you actually need.
-          </p>
-
-        </div>
-
-        <div class="package-grid">
-
-          <article class="package-card">
-
-            <span class="package-tag">START HERE</span>
-
-            <h3>Website check</h3>
-            <p class="package-price">Free</p>
-
-            <p>
-              A short, plain-English look at your website
-              and a few useful improvement ideas.
-            </p>
-
-            <ul>
-              <li>Initial visual review</li>
-              <li>Top opportunities to improve</li>
-              <li>Suggested next steps</li>
-            </ul>
-
-            <a class="button button-outline" href="#contact">
-              Request a check ↗
-            </a>
-
-          </article>
-
-          <article class="package-card package-highlight">
-
-            <span class="package-tag">MORE DETAIL</span>
-
-            <h3>Full website review</h3>
-            <p class="package-price">Custom quote</p>
-
-            <p>
-              A deeper look at your website's content,
-              usability and key technical basics.
-            </p>
-
-            <ul>
-              <li>Prioritised findings</li>
-              <li>Plain-language recommendations</li>
-              <li>Improvement roadmap</li>
-            </ul>
-
-            <a class="button button-dark" href="#contact">
-              Ask about a review ↗
-            </a>
-
-          </article>
-
-          <article class="package-card">
-
-            <span class="package-tag">MAKE IT HAPPEN</span>
-
-            <h3>Build or improve</h3>
-            <p class="package-price">Custom quote</p>
-
-            <p>
-              Practical design and development based on
-              your goals, pages and requirements.
-            </p>
-
-            <ul>
-              <li>New website or redesign</li>
-              <li>Testing across screen sizes</li>
-              <li>Launch guidance</li>
-            </ul>
-
-            <a class="button button-outline" href="#contact">
-              Discuss a project ↗
-            </a>
-
-          </article>
-
-        </div>
-
-        <p class="pricing-note">
-          A written scope and quote are shared before paid work begins.
-          Domain, hosting, paid tools and ongoing maintenance are
-          discussed separately where relevant.
-        </p>
-
-      </div>
-
-    </section>
-
     <!-- FAQ -->
     <section class="section-pad faq-section" id="faq">
 
@@ -1424,10 +1390,9 @@
               <span>＋</span>
             </summary>
             <p>
-              It depends on the number of pages, features,
-              content and integrations. After a short conversation,
-              you'll receive a clear quote before deciding whether
-              to proceed.
+              Choose a <a href="#packages">website package</a> and tell me what you need.
+              I’ll confirm the scope, price and revision rounds in a written quote.
+              Domain, hosting and ongoing maintenance are discussed separately.
             </p>
           </details>
 
@@ -1511,15 +1476,13 @@
           </p>
 
           <h2>
-            Have a good idea?
-            <br>
-            <span class="gradient-text">Let's make it real.</span>
+            Tell me about<br>
+            <span class="gradient-text">your business.</span>
           </h2>
 
           <p>
-            Tell me a little about your business. You don't need
-            a perfect brief or technical words — just start with
-            what you'd like to achieve.
+            What do you offer, where do you work, and what should a customer
+            do on your website? Email me or call to discuss a written quote.
           </p>
 
           <div class="contact-promise">
@@ -1559,7 +1522,7 @@
         </div>
 
         <!-- Contact form -->
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" method="dialog" hidden>
 
           <div class="form-heading">
 
@@ -1591,8 +1554,13 @@
                 Choose what sounds closest
               </option>
               <option>Build a new website</option>
-              <option>Redesign my current website</option>
-              <option>Fix or improve my website</option>
+              <option value="starter">One-page Starter</option>
+              <option value="business">Small Business Website</option>
+              <option value="refresh">Website Refresh / redesign</option>
+              <option value="demo">A website like one of the demos</option>
+              <option value="check">Free homepage check</option>
+              <option value="review">Full website review</option>
+              <option value="fix">Fix or improve my website</option>
               <option>Website review / advice</option>
               <option>Not sure yet — let's discuss</option>
             </select>
@@ -1612,13 +1580,12 @@
           </label>
 
           <button class="button button-lime button-full" type="submit">
-            Prepare my enquiry <span>↗</span>
+            Prepare an email draft <span>↗</span>
           </button>
 
           <p class="form-note">
-            Your email application will open with your message ready
-            to send. This form does not store or send information
-            to a server.
+            Review the draft in your email app, then send it when you’re ready.
+            You can also email me directly using the address on this page.
           </p>
 
           <p class="form-status" id="form-status" role="status" aria-live="polite">
@@ -1655,13 +1622,17 @@
         Better business connections.
       </p>
 
-      <div class="footer-links">
+      <nav class="footer-links" id="footer-nav" aria-label="Footer navigation" tabindex="-1">
         <a href="#services">Services</a>
-        <a href="#work">Work</a>
+        <a href="#packages">Packages</a>
+        <a href="#work">Demos</a>
+        <a href="#process">Process</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#faq">FAQs</a>
         <a href="#contact">Contact</a>
-      </div>
+      </nav>
 
       <a class="back-top" href="#top" aria-label="Back to top">
         BACK TO TOP ↑
@@ -1685,8 +1656,8 @@
 
   </footer>
 
-  <a class="floating-contact" href="#contact" aria-label="Contact Narendra Koya">
-    Let's talk ↗
+  <a class="floating-contact" href="#contact" aria-label="Get a website quote">
+    Get a quote ↗
   </a>
 
   <script src="script.js"></script>

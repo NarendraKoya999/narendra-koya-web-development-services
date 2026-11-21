@@ -81,11 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Close navigation using Escape.
     document.addEventListener("keydown", function (event) {
 
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
         closeMenu();
+        menuToggle.focus();
       }
 
     });
+
+    menuToggle.closest("header").classList.add("nav-ready");
 
     // Close mobile navigation when returning to desktop width.
     window.addEventListener("resize", function () {
@@ -136,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactEmail = "narendra.koya.in@gmail.com";
 
   if (contactForm) {
+    const needSelect = contactForm.elements.namedItem("need");
 
     contactForm.addEventListener("submit", function (event) {
 
@@ -146,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const name = String(formData.get("name") || "").trim();
       const email = String(formData.get("email") || "").trim();
-      const need = String(formData.get("need") || "").trim();
+      const need = needSelect.value ? needSelect.selectedOptions[0].textContent.trim() : "";
       const website = String(formData.get("website") || "").trim();
       const message = String(formData.get("message") || "").trim();
 
@@ -198,6 +202,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    document.querySelectorAll("[data-enquiry]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        needSelect.value = link.dataset.enquiry;
+      });
+    });
+    contactForm.hidden = false;
   }
 
 
