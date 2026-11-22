@@ -2444,6 +2444,56 @@ summary:focus-visible {
   margin: 0 0 .75rem;
 }
 
+.contact-options summary {
+  width: fit-content;
+  max-width: 100%;
+  padding-block: .35rem;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+
+.contact-direct .contact-options summary {
+  color: var(--lime);
+}
+
+.contact-options p, .draft-preview small {
+  font-size: .875rem;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem 1rem;
+  margin-block: .45rem;
+}
+
+.contact-actions :is(a, button) {
+  padding: .4rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+
+.draft-preview {
+  margin-top: 1rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--line);
+}
+
+.draft-preview h4 { margin: .25rem 0 .75rem; }
+.copy-status { font-size: .875rem; }
+.copy-status:empty { margin: 0; }
+
 /* Contact form */
 
 .contact-form {
