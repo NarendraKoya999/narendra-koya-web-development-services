@@ -42,6 +42,6 @@ BEFORE PUBLISHING
 2. Preview every page on mobile, tablet and desktop.
 3. Keep all demo labels and fictional-business disclaimers visible.
 4. Replace no demo content with client claims unless the work and permission are real.
-5. The portfolio enquiry form opens the visitor's email application. A backend is needed for direct form submission.
+5. The enquiry form previews a draft locally. Visitors choose Gmail, their email app, or a copyable draft. A backend is needed for direct form submission.
 6. Confirm analytics, retention and the commercial host before launch. GA4 is configured only on the existing production portfolio origin and path. Review the privacy note whenever integrations change.
 7. Google Fonts require an internet connection; system fallbacks are provided.

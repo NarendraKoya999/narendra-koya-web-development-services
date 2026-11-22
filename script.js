@@ -133,78 +133,99 @@ document.addEventListener("DOMContentLoaded", function () {
      5. CONTACT FORM
   ======================================== */
 
-  const contactForm = document.getElementById("contact-form");
-  const formStatus = document.getElementById("form-status");
+  document.querySelectorAll("button[data-copy]").forEach(function (button) {
+    const source = document.getElementById(button.dataset.copy);
+    const status = button.closest("details, section").querySelector(".copy-status");
 
-  const contactEmail = "narendra.koya.in@gmail.com";
-
-  if (contactForm) {
-    const needSelect = contactForm.elements.namedItem("need");
-
-    contactForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      // Read the form values.
-      const formData = new FormData(contactForm);
-
-      const name = String(formData.get("name") || "").trim();
-      const email = String(formData.get("email") || "").trim();
-      const need = needSelect.value ? needSelect.selectedOptions[0].textContent.trim() : "";
-      const website = String(formData.get("website") || "").trim();
-      const message = String(formData.get("message") || "").trim();
-
-      // Basic validation.
-      if (!name || !email || !need) {
-
-        if (formStatus) {
-          formStatus.textContent =
-            "Please complete the required fields.";
+    button.addEventListener("click", async function () {
+      const isDraft = source instanceof HTMLTextAreaElement;
+      const text = isDraft ? source.value : source.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Copied to clipboard.";
+      } catch {
+        if (isDraft) {
+          source.focus();
+          source.select();
+        } else {
+          window.getSelection().selectAllChildren(source);
         }
+        status.textContent = "Text selected. Use your device’s Copy command.";
+      }
+    });
+    button.hidden = false;
+  });
 
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    const status = document.getElementById("form-status");
+    const preview = document.getElementById("draft-preview");
+    const draftText = document.getElementById("draft-text");
+    const need = contactForm.elements.namedItem("need");
+    const recipient = document.getElementById("contact-address").textContent.trim();
+    let subject = "";
+    let body = "";
+
+    function clearDraft() {
+      preview.hidden = true;
+      draftText.value = "";
+      subject = "";
+      body = "";
+      status.textContent = "";
+      preview.querySelector(".copy-status").textContent = "";
+    }
+
+    contactForm.addEventListener("input", clearDraft);
+    contactForm.addEventListener("reset", clearDraft);
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const fields = new FormData(contactForm);
+      const name = fields.get("name").trim();
+      const email = fields.get("email").trim();
+      if (!name || !email || !need.value) {
+        clearDraft();
+        status.textContent = "Please complete the required fields.";
         return;
       }
 
-      // Prepare the email subject.
-      const subject =
-        "Website enquiry from " + name;
-
-      // Prepare the email body.
-      const body = [
+      subject = "Website enquiry from " + name;
+      body = [
         "Hello Narendra,",
         "",
         "I would like to discuss a website project.",
         "",
         "Name: " + name,
         "Email: " + email,
-        "Requirement: " + need,
-        "Existing website: " + (website || "Not provided"),
+        "Requirement: " + need.selectedOptions[0].textContent.trim(),
+        "Existing website: " + (fields.get("website").trim() || "Not provided"),
         "",
         "Additional information:",
-        message || "No additional information provided.",
+        fields.get("message").trim() || "No additional information provided.",
         "",
         "Thank you."
       ].join("\n");
 
-      // Create the mailto link.
-      const mailtoLink =
-        "mailto:" + contactEmail +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
+      draftText.value = "To: " + recipient + "\nSubject: " + subject + "\n\n" + body;
+      preview.querySelector(".copy-status").textContent = "";
+      status.textContent = "";
+      preview.hidden = false;
+      document.getElementById("draft-heading").focus();
+    });
 
-      if (formStatus) {
-        formStatus.textContent =
-          "Opening your email application...";
-      }
+    document.getElementById("draft-gmail").addEventListener("click", function () {
+      const params = new URLSearchParams({view: "cm", fs: "1", to: recipient, su: subject, body});
+      window.open("https://mail.google.com/mail/?" + params, "_blank", "noopener,noreferrer");
+    });
 
-      // Open the visitor's default email application.
-      window.location.href = mailtoLink;
-
+    document.getElementById("draft-app").addEventListener("click", function () {
+      window.location.href = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
     });
 
     document.querySelectorAll("[data-enquiry]").forEach(function (link) {
       link.addEventListener("click", function () {
-        needSelect.value = link.dataset.enquiry;
+        need.value = link.dataset.enquiry;
+        clearDraft();
       });
     });
     contactForm.hidden = false;
