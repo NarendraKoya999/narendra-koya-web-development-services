@@ -19,7 +19,9 @@ All business names, addresses, contact details, menu items and sample prices are
 FILES
 - index.html       Main personal portfolio
 - style.css        Portfolio styles and responsive layouts
-- script.js        Mobile navigation, enquiries by package and email drafts
+- script.js        Mobile navigation, WhatsApp links, local enquiry drafts and conversion events
+- og-preview.png   Social sharing preview (1200 × 630)
+- fonts/           Telugu fallback font and license
 - privacy.html     Visitor privacy information
 - demos/           Three standalone demo websites, each with HTML, CSS and JavaScript
 
@@ -42,6 +44,6 @@ BEFORE PUBLISHING
 2. Preview every page on mobile, tablet and desktop.
 3. Keep all demo labels and fictional-business disclaimers visible.
 4. Replace no demo content with client claims unless the work and permission are real.
-5. The enquiry form previews a draft locally. Visitors choose Gmail, their email app, or a copyable draft. A backend is needed for direct form submission.
+5. Test both enquiry actions. WhatsApp opens with the entered details; email drafts offer Gmail, an email app and copying. To change the WhatsApp destination, update the whatsapp-contact link in index.html.
 6. Confirm analytics, retention and the commercial host before launch. GA4 is configured only on the existing production portfolio origin and path. Review the privacy note whenever integrations change.
 7. Google Fonts require an internet connection; system fallbacks are provided.

@@ -133,6 +133,53 @@ document.addEventListener("DOMContentLoaded", function () {
      5. CONTACT FORM
   ======================================== */
 
+  // The contact link in index.html is the single source for the WhatsApp Business number.
+  const whatsappBase = document.getElementById("whatsapp-contact").href;
+
+  function whatsappUrl(message) {
+    return whatsappBase + "?text=" + encodeURIComponent(message).replace(/'/g, "%27");
+  }
+
+  function track(eventName, parameters) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, parameters);
+    }
+  }
+
+  document.querySelectorAll("[data-wa-location]").forEach(function (link) {
+    link.href = whatsappUrl(link.dataset.waMessage);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.addEventListener("click", function () {
+      track("whatsapp_click", { location: link.dataset.waLocation });
+    });
+  });
+
+  document.querySelectorAll("[data-demo]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      track("demo_open", { demo_name: link.dataset.demo });
+    });
+  });
+
+  const actionBar = document.querySelector(".mobile-actions");
+  if (actionBar && "IntersectionObserver" in window) {
+    const hero = document.querySelector(".hero");
+    const contact = document.getElementById("contact");
+    const footer = document.querySelector(".site-footer");
+    const mobile = window.matchMedia("(max-width: 760px)");
+
+    function updateActionBar() {
+      const beforeContact = contact.getBoundingClientRect().top > window.innerHeight;
+      actionBar.hidden = !mobile.matches || hero.getBoundingClientRect().bottom > 0 ||
+        !beforeContact || footer.getBoundingClientRect().top <= window.innerHeight;
+    }
+
+    const observer = new IntersectionObserver(updateActionBar);
+    [hero, contact, footer].forEach(element => observer.observe(element));
+    mobile.addEventListener("change", updateActionBar);
+    updateActionBar();
+  }
+
   document.querySelectorAll("button[data-copy]").forEach(function (button) {
     const source = document.getElementById(button.dataset.copy);
     const status = button.closest("details, section").querySelector(".copy-status");
@@ -162,6 +209,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const preview = document.getElementById("draft-preview");
     const draftText = document.getElementById("draft-text");
     const need = contactForm.elements.namedItem("need");
+    const heading = document.getElementById("draft-heading");
+    const gmail = document.getElementById("draft-gmail");
+    const emailApp = document.getElementById("draft-app");
     const recipient = document.getElementById("contact-address").textContent.trim();
     let subject = "";
     let body = "";
@@ -182,42 +232,57 @@ document.addEventListener("DOMContentLoaded", function () {
       const fields = new FormData(contactForm);
       const name = fields.get("name").trim();
       const email = fields.get("email").trim();
-      if (!name || !email || !need.value) {
+      const isWhatsApp = event.submitter?.value !== "email";
+      const missingField = !name ? contactForm.elements.namedItem("name")
+        : !isWhatsApp && !email ? contactForm.elements.namedItem("email") : null;
+      if (missingField) {
         clearDraft();
-        status.textContent = "Please complete the required fields.";
+        missingField.setCustomValidity(!name ? "Enter your name." : "Enter an email address for the email draft.");
+        missingField.reportValidity();
+        missingField.setCustomValidity("");
         return;
       }
 
       subject = "Website enquiry from " + name;
-      body = [
+      const lines = [
         "Hello Narendra,",
         "",
         "I would like to discuss a website project.",
         "",
         "Name: " + name,
-        "Email: " + email,
-        "Requirement: " + need.selectedOptions[0].textContent.trim(),
-        "Existing website: " + (fields.get("website").trim() || "Not provided"),
-        "",
-        "Additional information:",
-        fields.get("message").trim() || "No additional information provided.",
-        "",
-        "Thank you."
-      ].join("\n");
+        "Requirement: " + need.selectedOptions[0].textContent.trim()
+      ];
+      if (email) lines.push("Email: " + email);
+      const website = fields.get("website").trim();
+      if (website) lines.push("Existing website: " + website);
+      const notes = fields.get("notes").trim();
+      if (notes) lines.push("", "Additional information:", notes);
+      body = lines.join("\n");
 
-      draftText.value = "To: " + recipient + "\nSubject: " + subject + "\n\n" + body;
+      gmail.hidden = isWhatsApp;
+      emailApp.hidden = isWhatsApp;
+      if (isWhatsApp) {
+        heading.textContent = "Your WhatsApp draft";
+        draftText.value = body;
+        window.open(whatsappUrl(body), "_blank", "noopener,noreferrer");
+        track("whatsapp_click", { location: "contact_form" });
+      } else {
+        heading.textContent = "Your email draft is ready";
+        draftText.value = "To: " + recipient + "\nSubject: " + subject + "\n\n" + body;
+        track("email_draft_generated", { location: "contact_form" });
+      }
       preview.querySelector(".copy-status").textContent = "";
       status.textContent = "";
       preview.hidden = false;
-      document.getElementById("draft-heading").focus();
+      heading.focus();
     });
 
-    document.getElementById("draft-gmail").addEventListener("click", function () {
+    gmail.addEventListener("click", function () {
       const params = new URLSearchParams({view: "cm", fs: "1", to: recipient, su: subject, body});
       window.open("https://mail.google.com/mail/?" + params, "_blank", "noopener,noreferrer");
     });
 
-    document.getElementById("draft-app").addEventListener("click", function () {
+    emailApp.addEventListener("click", function () {
       window.location.href = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject)
         + "&body=" + encodeURIComponent(body);
     });
